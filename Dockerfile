@@ -1,0 +1,10 @@
+FROM astrocrpublic.azurecr.io/runtime:3.1-4
+
+# Instalar dbt e adaptar o conector para o Postgres
+RUN pip install dbt-core==1.9.0 dbt-postgres==1.9.0
+
+# Garantir que o diretório .dbt esteha dentro do container
+RUN mkdir -p /home/astro/.dbt
+COPY include/.dbt/profiles.yml /home/astro/.dbt/profiles.yml
+
+USER astro
